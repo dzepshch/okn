@@ -1,0 +1,176 @@
+.routes-page {
+  padding-top: var(--nav-h);
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 380px 1fr;
+}
+
+/* ── LEFT PANEL ── */
+.routes-panel {
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  height: calc(100vh - var(--nav-h));
+  position: sticky; top: var(--nav-h);
+  overflow: hidden;
+}
+
+.panel-header {
+  padding: 28px 28px 20px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.panel-header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px; font-weight: 600; color: var(--green-dark);
+  margin-bottom: 6px;
+}
+.panel-header p { font-size: 13px; color: var(--ink-soft); line-height: 1.5; }
+
+/* Поиск объекта для добавления */
+.add-object-section {
+  padding: 20px 28px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.add-label {
+  font-size: 11px; font-weight: 500; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--green-mid); margin-bottom: 10px;
+}
+.add-search-wrap {
+  display: flex; gap: 8px;
+}
+.add-search-wrap input {
+  flex: 1; padding: 10px 14px; border: 1px solid var(--border);
+  border-radius: 2px; font-size: 13px; font-family: 'Geologica', sans-serif;
+  color: var(--ink); outline: none;
+}
+.add-search-wrap input:focus { border-color: var(--green-main); }
+.add-search-wrap button {
+  padding: 10px 16px; background: var(--green-main); color: #fff;
+  border: none; border-radius: 2px; cursor: pointer;
+  font-size: 13px; transition: background .2s;
+}
+.add-search-wrap button:hover { background: var(--green-mid); }
+
+/* Дропдаун результатов поиска */
+.add-results {
+  margin-top: 8px; border: 1px solid var(--border); border-radius: 2px;
+  background: #fff; max-height: 200px; overflow-y: auto; display: none;
+}
+.add-results.open { display: block; }
+.add-result-item {
+  padding: 10px 14px; cursor: pointer; border-bottom: 1px solid var(--border);
+  transition: background .15s;
+}
+.add-result-item:last-child { border-bottom: none; }
+.add-result-item:hover { background: var(--green-pale); }
+.add-result-name { font-size: 13px; color: var(--ink); }
+.add-result-sub { font-size: 11px; color: var(--ink-soft); margin-top: 2px; }
+
+/* Список маршрута */
+.route-list-section {
+  flex: 1; overflow-y: auto; padding: 20px 28px;
+}
+.route-empty {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 40px 0; gap: 10px; color: var(--ink-soft); text-align: center;
+}
+.route-empty-icon { font-size: 36px; opacity: .3; }
+.route-empty p { font-size: 13px; line-height: 1.5; }
+
+.route-items { display: flex; flex-direction: column; gap: 8px; }
+.route-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 14px; border: 1px solid var(--border);
+  border-radius: 2px; background: #fff;
+}
+.route-item-num {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--green-main); color: #fff;
+  font-size: 11px; font-weight: 500;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.route-item-info { flex: 1; min-width: 0; }
+.route-item-name {
+  font-size: 13px; font-weight: 400; color: var(--ink);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.route-item-sub { font-size: 11px; color: var(--ink-soft); margin-top: 2px; }
+.route-item-remove {
+  width: 28px; height: 28px; border: 1px solid var(--border);
+  border-radius: 2px; background: transparent; cursor: pointer;
+  color: var(--ink-soft); font-size: 16px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; transition: all .2s;
+}
+.route-item-remove:hover { background: #fee; border-color: #fcc; color: #c00; }
+
+/* Футер панели — статистика и кнопка */
+.panel-footer {
+  padding: 20px 28px;
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.route-stats {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 12px; margin-bottom: 16px;
+}
+.route-stat { display: flex; flex-direction: column; gap: 3px; }
+.route-stat-val {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px; font-weight: 600; color: var(--green-dark);
+}
+.route-stat-label {
+  font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--green-mid);
+}
+.route-stat-placeholder { color: var(--border); }
+.build-btn {
+  width: 100%; padding: 14px; background: var(--green-dark); color: #fff;
+  border: none; border-radius: 2px; cursor: pointer;
+  font-size: 13px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase;
+  font-family: 'Geologica', sans-serif; transition: background .2s;
+}
+.build-btn:hover { background: var(--green-mid); }
+.build-btn:disabled { opacity: .5; cursor: default; }
+
+/* ── MAP SIDE ── */
+.routes-map-wrap { position: relative; }
+#routes-map {
+  width: 100%;
+  height: calc(100vh - var(--nav-h));
+  position: sticky; top: var(--nav-h);
+}
+
+/* Предложения — рекомендации КО рядом */
+.suggestions-panel {
+  position: absolute; bottom: 24px; right: 24px; z-index: 10;
+  background: var(--paper); border: 1px solid var(--border);
+  border-radius: 2px; padding: 16px 20px; max-width: 280px;
+  box-shadow: 0 8px 32px rgba(0,0,0,.1); display: none;
+}
+.suggestions-panel.open { display: block; }
+.suggestions-title {
+  font-size: 11px; font-weight: 500; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--green-mid); margin-bottom: 12px;
+}
+.suggestion-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 0; border-bottom: 1px solid var(--border);
+  cursor: pointer;
+}
+.suggestion-item:last-child { border-bottom: none; }
+.suggestion-item:hover .suggestion-name { color: var(--green-main); }
+.suggestion-name { font-size: 13px; color: var(--ink); flex: 1; line-height: 1.3; }
+.suggestion-add {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--green-pale); color: var(--green-dark);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0;
+}
+
+/* ── MOBILE ── */
+@media (max-width: 900px) {
+  .routes-page { grid-template-columns: 1fr; }
+  .routes-panel { position: static; height: auto; }
+  #routes-map { height: 60vw; position: static; }
+  .suggestions-panel { position: static; max-width: 100%; margin: 16px; }
+}

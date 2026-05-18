@@ -1,0 +1,230 @@
+.search-page {
+  padding-top: var(--nav-h);
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  grid-template-rows: auto 1fr;
+}
+
+/* ── SEARCH HEADER ── */
+.search-header {
+  grid-column: 1 / -1;
+  padding: 32px 48px 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+}
+.search-header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px; font-weight: 600; color: var(--green-dark);
+  margin-right: auto;
+}
+.search-input-wrap {
+  display: flex; align-items: center;
+  border: 1px solid var(--border); border-radius: 2px;
+  background: #fff; overflow: hidden;
+  flex: 1; min-width: 220px; max-width: 400px;
+}
+.search-input-wrap input {
+  flex: 1; padding: 11px 16px; border: none; outline: none;
+  font-size: 14px; font-family: 'Geologica', sans-serif;
+  color: var(--ink); background: transparent;
+}
+.search-input-wrap button {
+  padding: 11px 20px; border: none; background: var(--green-main);
+  color: #fff; cursor: pointer; font-size: 13px; transition: background .2s;
+}
+.search-input-wrap button:hover { background: var(--green-mid); }
+
+.view-toggle { display: flex; gap: 4px; }
+.view-btn {
+  padding: 10px 14px; border: 1px solid var(--border); background: #fff;
+  cursor: pointer; color: var(--ink-soft); font-size: 16px;
+  transition: all .2s; border-radius: 2px;
+}
+.view-btn.active { background: var(--green-dark); color: #fff; border-color: var(--green-dark); }
+
+/* ── SIDEBAR FILTERS ── */
+.search-sidebar {
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  height: calc(100vh - var(--nav-h) - 81px);
+  position: sticky;
+  top: calc(var(--nav-h) + 81px);
+}
+.filter-group { margin-bottom: 24px; }
+.filter-group label {
+  display: block; font-size: 11px; font-weight: 500;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--green-mid); margin-bottom: 8px;
+}
+.filter-group select {
+  width: 100%; padding: 10px 12px; border: 1px solid var(--border);
+  border-radius: 2px; font-size: 13px; font-family: 'Geologica', sans-serif;
+  color: var(--ink); background: #fff; cursor: pointer; outline: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234D8051' fill='none' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+}
+.filter-group select:focus { border-color: var(--green-main); }
+.filter-reset {
+  width: 100%; padding: 10px; border: 1px solid var(--border);
+  border-radius: 2px; background: transparent; cursor: pointer;
+  font-size: 12px; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--ink-soft); font-family: 'Geologica', sans-serif; transition: all .2s;
+}
+.filter-reset:hover { background: var(--green-pale); border-color: var(--green-main); }
+
+/* ── SEARCH CONTENT ── */
+.search-content {
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+
+/* Карта */
+#search-map {
+  width: 100%;
+  height: calc(100vh - var(--nav-h) - 81px);
+  display: block;
+}
+.search-content.list-view #search-map { display: none; }
+.search-content.map-view .list-container { display: none; }
+
+/* Список */
+.list-container {
+  flex: 1; overflow-y: auto;
+  padding: 24px 32px;
+}
+.results-count {
+  font-size: 12px; color: var(--ink-soft); letter-spacing: .06em;
+  text-transform: uppercase; margin-bottom: 20px;
+}
+.results-count span { color: var(--green-main); font-weight: 500; }
+
+.objects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+.object-card {
+  border: 1px solid var(--border); border-radius: 2px;
+  padding: 20px; background: #fff;
+  cursor: pointer; transition: all .2s;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.object-card:hover {
+  border-color: var(--green-main);
+  box-shadow: 0 4px 20px rgba(31,53,33,.08);
+  transform: translateY(-2px);
+}
+.object-card-type {
+  font-size: 10px; font-weight: 500; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--green-main);
+}
+.object-card-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px; font-weight: 600; color: var(--green-dark);
+  line-height: 1.3;
+}
+.object-card-district { font-size: 12px; color: var(--ink-soft); }
+.object-card-address { font-size: 12px; color: var(--ink-soft); margin-top: auto; }
+.object-card-category {
+  font-size: 10px; padding: 3px 8px; border-radius: 2px;
+  background: var(--green-pale); color: var(--green-dark);
+  display: inline-block; width: fit-content;
+}
+
+/* Пагинация */
+.pagination {
+  display: flex; align-items: center; justify-content: center;
+  gap: 8px; padding: 24px; border-top: 1px solid var(--border);
+}
+.page-btn {
+  width: 36px; height: 36px; border: 1px solid var(--border);
+  border-radius: 2px; background: #fff; cursor: pointer;
+  font-size: 13px; color: var(--ink-soft); transition: all .2s;
+  font-family: 'Geologica', sans-serif;
+}
+.page-btn:hover { background: var(--green-pale); border-color: var(--green-main); }
+.page-btn.active { background: var(--green-dark); color: #fff; border-color: var(--green-dark); }
+.page-btn:disabled { opacity: .4; cursor: default; }
+
+/* ── OBJECT MODAL ── */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 2000;
+  background: rgba(0,0,0,.4); backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px; opacity: 0; pointer-events: none; transition: opacity .2s;
+}
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+.modal {
+  background: var(--paper); border-radius: 2px;
+  max-width: 520px; width: 100%;
+  max-height: 80vh; overflow-y: auto;
+  transform: translateY(16px); transition: transform .2s;
+}
+.modal-overlay.open .modal { transform: translateY(0); }
+.modal-header {
+  padding: 28px 32px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: flex-start; gap: 16px;
+}
+.modal-header-text { flex: 1; }
+.modal-type {
+  font-size: 10px; font-weight: 500; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--green-main); margin-bottom: 6px;
+}
+.modal-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px; font-weight: 600; color: var(--green-dark); line-height: 1.3;
+}
+.modal-close {
+  width: 32px; height: 32px; border: 1px solid var(--border);
+  border-radius: 2px; background: transparent; cursor: pointer;
+  font-size: 18px; color: var(--ink-soft); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.modal-body { padding: 24px 32px; display: flex; flex-direction: column; gap: 12px; }
+.modal-row { display: flex; gap: 12px; }
+.modal-label {
+  font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--green-mid); width: 110px; flex-shrink: 0; padding-top: 1px;
+}
+.modal-value { font-size: 14px; color: var(--ink); line-height: 1.5; }
+.modal-footer {
+  padding: 20px 32px 28px;
+  display: flex; gap: 12px;
+}
+
+/* ── LOADING ── */
+.loading {
+  display: flex; align-items: center; justify-content: center;
+  padding: 60px; color: var(--ink-soft); font-size: 14px; gap: 12px;
+}
+.spinner {
+  width: 20px; height: 20px; border: 2px solid var(--green-pale);
+  border-top-color: var(--green-main); border-radius: 50%;
+  animation: spin .7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.empty-state {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 60px 24px; gap: 12px; color: var(--ink-soft); text-align: center;
+}
+.empty-state-icon { font-size: 40px; opacity: .4; }
+.empty-state p { font-size: 14px; }
+
+/* ── MOBILE ── */
+@media (max-width: 900px) {
+  .search-page { grid-template-columns: 1fr; }
+  .search-header { padding: 20px 24px 16px; }
+  .search-header h1 { font-size: 18px; }
+  .search-sidebar {
+    position: static; height: auto;
+    border-right: none; border-bottom: 1px solid var(--border);
+  }
+  .list-container { padding: 16px; }
+  .objects-grid { grid-template-columns: 1fr; }
+}

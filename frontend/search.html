@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Поиск объектов — Культурная карта Москвы</title>
+  <link rel="stylesheet" href="static/css/main.css">
+  <link rel="stylesheet" href="static/css/search.css">
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">
+    <img src="static/images/logo.svg" alt="Логотип">
+    <div class="nav-brand"><span>Культурная карта</span><span>Москва</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Главная</a></li>
+    <li><a href="search.html" class="active">Поиск</a></li>
+    <li><a href="routes.html">Маршруты</a></li>
+  </ul>
+  <div class="nav-burger" id="burger"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Главная</a>
+  <a href="search.html">Поиск объектов</a>
+  <a href="routes.html">Построить маршрут</a>
+</div>
+
+<div class="search-page">
+
+  <!-- Шапка поиска -->
+  <div class="search-header">
+    <h1>Поиск объектов</h1>
+    <div class="search-input-wrap">
+      <input type="text" id="search-input" placeholder="Название объекта...">
+      <button id="search-btn">Найти</button>
+    </div>
+    <div class="view-toggle">
+      <button class="view-btn active" id="view-list" title="Список">☰</button>
+      <button class="view-btn" id="view-map" title="Карта">⊞</button>
+    </div>
+  </div>
+
+  <!-- Сайдбар с фильтрами -->
+  <aside class="search-sidebar">
+    <div class="filter-group">
+      <label>Административный округ</label>
+      <select id="filter-adm"><option value="">Все округа</option></select>
+    </div>
+    <div class="filter-group">
+      <label>Тип объекта</label>
+      <select id="filter-type"><option value="">Все типы</option></select>
+    </div>
+    <div class="filter-group">
+      <label>Категория</label>
+      <select id="filter-cat"><option value="">Все категории</option></select>
+    </div>
+    <button class="filter-reset" id="filter-reset">Сбросить фильтры</button>
+  </aside>
+
+  <!-- Контент -->
+  <div class="search-content list-view" id="search-content">
+
+    <!-- Карта Яндекс (скрыта в режиме списка) -->
+    <!-- Подключи ключ: замени YOUR_API_KEY -->
+    <div id="search-map"></div>
+
+    <!-- Список -->
+    <div class="list-container">
+      <div class="results-count" id="results-count">Загрузка...</div>
+      <div class="objects-grid" id="objects-grid">
+        <div class="loading"><div class="spinner"></div> Загрузка...</div>
+      </div>
+      <div class="pagination" id="pagination"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Модальное окно объекта -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal" id="object-modal">
+    <div class="modal-header">
+      <div class="modal-header-text">
+        <div class="modal-type" id="modal-type"></div>
+        <div class="modal-name" id="modal-name"></div>
+      </div>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-row">
+        <div class="modal-label">Округ</div>
+        <div class="modal-value" id="modal-adm"></div>
+      </div>
+      <div class="modal-row">
+        <div class="modal-label">Район</div>
+        <div class="modal-value" id="modal-district"></div>
+      </div>
+      <div class="modal-row">
+        <div class="modal-label">Адрес</div>
+        <div class="modal-value" id="modal-address"></div>
+      </div>
+      <div class="modal-row">
+        <div class="modal-label">Категория</div>
+        <div class="modal-value" id="modal-category"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary btn-sm" id="modal-add-route">Добавить в маршрут</button>
+      <button class="btn btn-outline btn-sm" onclick="closeModal()">Закрыть</button>
+    </div>
+    <input type="hidden" id="modal-id">
+  </div>
+</div>
+
+<!-- Яндекс Карты — замени YOUR_API_KEY -->
+<script src="https://api-maps.yandex.ru/2.1/?apikey=YOUR_API_KEY&lang=ru_RU" type="text/javascript"></script>
+<script src="static/js/search.js"></script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Маршруты — Культурная карта Москвы</title>
+  <link rel="stylesheet" href="static/css/main.css">
+  <link rel="stylesheet" href="static/css/routes.css">
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">
+    <img src="static/images/logo.svg" alt="Логотип">
+    <div class="nav-brand"><span>Культурная карта</span><span>Москва</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Главная</a></li>
+    <li><a href="search.html">Поиск</a></li>
+    <li><a href="routes.html" class="active">Маршруты</a></li>
+  </ul>
+  <div class="nav-burger" id="burger"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Главная</a>
+  <a href="search.html">Поиск объектов</a>
+  <a href="routes.html">Построить маршрут</a>
+</div>
+
+<div class="routes-page">
+
+  <!-- Левая панель -->
+  <div class="routes-panel">
+
+    <div class="panel-header">
+      <h1>Построить маршрут</h1>
+      <p>Добавьте объекты и мы рассчитаем оптимальный порядок обхода.</p>
+    </div>
+
+    <!-- Добавление объектов -->
+    <div class="add-object-section">
+      <div class="add-label">Добавить объект</div>
+      <div class="add-search-wrap">
+        <input type="text" id="add-search-input" placeholder="Начните вводить название...">
+        <button id="add-search-btn">Найти</button>
+      </div>
+      <div class="add-results" id="add-results"></div>
+    </div>
+
+    <!-- Список объектов маршрута -->
+    <div class="route-list-section">
+      <div class="route-empty" id="route-empty">
+        <div class="route-empty-icon">🗺</div>
+        <p>Добавьте объекты для построения маршрута.<br>Минимум 2 объекта.</p>
+      </div>
+      <div class="route-items" id="route-items"></div>
+    </div>
+
+    <!-- Статистика и кнопка -->
+    <div class="panel-footer">
+      <div class="route-stats">
+        <div class="route-stat">
+          <div class="route-stat-val route-stat-placeholder" id="stat-duration">—</div>
+          <div class="route-stat-label">Длительность</div>
+        </div>
+        <div class="route-stat">
+          <div class="route-stat-val route-stat-placeholder" id="stat-distance">—</div>
+          <div class="route-stat-label">Расстояние</div>
+        </div>
+        <div class="route-stat">
+          <div class="route-stat-val" id="stat-count">0 объектов</div>
+          <div class="route-stat-label">Объектов</div>
+        </div>
+      </div>
+      <button class="build-btn" id="build-btn" disabled>Построить маршрут</button>
+<button class="btn btn-outline" id="open-yandex-btn" style="width:100%;margin-top:8px;display:none" onclick="openInYandex()">
+  Открыть в Яндекс Картах →
+</button>
+    </div>
+
+  </div>
+
+  <!-- Карта -->
+  <div class="routes-map-wrap">
+    <div id="routes-map"></div>
+
+    <!-- Рекомендации -->
+    <div class="suggestions-panel" id="suggestions-panel">
+      <div class="suggestions-title">Рекомендуем добавить</div>
+      <div id="suggestions-list"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Яндекс Карты — замени YOUR_API_KEY -->
+<script src="https://api-maps.yandex.ru/2.1/?apikey=ВАШ_КЛЮЧ&lang=ru_RU&load=package.full"></script>
+<script src="static/js/routes.js"></script>
+</body>
+</html>
