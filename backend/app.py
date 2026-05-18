@@ -6,12 +6,24 @@ import math
 
 app = Flask(__name__)
 app.secret_key = FLASK_SECRET_KEY
-CORS(app, 
-     resources={r"/api/*": {
-         "origins": ["https://okn-365a.vercel.app", "http://localhost:3000", "http://127.0.0.1:5500", "*"],
-         "methods": ["GET", "POST", "OPTIONS"],
-         "allow_headers": ["Content-Type", "Authorization"]
-     }})
+# CORS — для отдельного фронтенда на Vercel
+CORS(app, resources={r"/api/*": {
+    "origins": [
+        "https://okn-365a.vercel.app",
+        "http://localhost:5500",
+        "http://127.0.0.1:5500",
+        "*"
+    ],
+    "methods": ["GET", "POST", "OPTIONS"],
+    "allow_headers": ["Content-Type", "Authorization"]
+}})
+
+@app.after_request
+def after_request(response):
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
+    response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
+    return response
 
 # Обработка OPTIONS (preflight)
 @app.route("/api/<path:path>", methods=["OPTIONS"])
