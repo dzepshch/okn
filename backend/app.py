@@ -6,7 +6,17 @@ import math
 
 app = Flask(__name__)
 app.secret_key = FLASK_SECRET_KEY
-CORS(app, resources={r"/api/*": {"origins": "*"}})  # разрешаем запросы с фронта
+CORS(app, 
+     resources={r"/api/*": {
+         "origins": ["https://okn-365a.vercel.app", "http://localhost:3000", "http://127.0.0.1:5500", "*"],
+         "methods": ["GET", "POST", "OPTIONS"],
+         "allow_headers": ["Content-Type", "Authorization"]
+     }})
+
+# Обработка OPTIONS (preflight)
+@app.route("/api/<path:path>", methods=["OPTIONS"])
+def options_handler(path):
+    return jsonify({}), 200  # разрешаем запросы с фронта
 
 # Supabase клиент
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
