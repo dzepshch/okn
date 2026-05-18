@@ -1,4 +1,4 @@
-const API = 'http://localhost:5000/api';
+const API = 'https://okn-nu.vercel.app/api/';
 
 // ── Состояние ──
 const routeState = {
