@@ -18,10 +18,16 @@ CORS(app,
 
 @app.after_request
 def add_cors_headers(response):
+    # Главный заголовок
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
     response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization, X-Requested-With'
-    response.headers['Access-Control-Max-Age'] = '86400'  # 24 часа
+    response.headers['Access-Control-Max-Age'] = '86400'
+    
+    # Дополнительно для редиректов
+    if response.status_code == 308:
+        response.status_code = 200
+    
     return response
 
 @app.after_request
