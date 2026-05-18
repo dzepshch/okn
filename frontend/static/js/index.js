@@ -1,4 +1,4 @@
-const API = 'http://localhost:5000/api';
+const API = 'https://okn-nu.vercel.app/api/';
 
 const districtData = {
   'SVAO':  { count: 0, full: 'Северо-Восточный административный округ' },
